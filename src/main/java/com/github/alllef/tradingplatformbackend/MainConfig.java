@@ -1,10 +1,12 @@
 package com.github.alllef.tradingplatformbackend;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.event.EventListener;
 
 import javax.sql.DataSource;
 
@@ -25,5 +27,10 @@ public class MainConfig {
                 .password(password)
                 .username(username)
                 .build();
+    }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void createData(){
+
     }
 }
