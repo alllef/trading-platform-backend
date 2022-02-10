@@ -18,7 +18,7 @@ public class PhotoAdvert {
     @Column(nullable = false)
     private String photo;
 
-    @ManyToOne
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "advertisement_id")
     private Advertisement advertisement;
 }

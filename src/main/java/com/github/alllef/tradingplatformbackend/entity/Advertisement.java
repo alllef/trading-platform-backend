@@ -2,6 +2,7 @@ package com.github.alllef.tradingplatformbackend.entity;
 
 import com.github.alllef.tradingplatformbackend.entity.enums.AdvertType;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -22,7 +23,7 @@ public class Advertisement {
     @Column(nullable = false)
     private AdvertType type;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
 
@@ -32,7 +33,7 @@ public class Advertisement {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
@@ -48,14 +49,14 @@ public class Advertisement {
     @Column(nullable = false)
     private String advertName;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "currency_id", nullable = false)
     private Currency currency;
 
     @Column(columnDefinition = "boolean default true")
     private Boolean isActive;
 
-    @OneToMany(mappedBy = "advertisement")
+    @OneToMany(mappedBy = "advertisement", fetch = FetchType.EAGER)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<PhotoAdvert> photos;

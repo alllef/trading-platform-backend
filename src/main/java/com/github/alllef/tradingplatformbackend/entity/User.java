@@ -34,7 +34,7 @@ public class User {
     @Column(columnDefinition = "boolean default false")
     private Boolean isVerified;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
