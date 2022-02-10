@@ -62,5 +62,7 @@ public class Advertisement {
     private Set<PhotoAdvert> photos;
 
     @OneToMany(mappedBy = "advertisement")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private Set<Review> reviews;
 }
