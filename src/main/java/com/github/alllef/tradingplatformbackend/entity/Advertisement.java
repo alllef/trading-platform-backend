@@ -2,7 +2,6 @@ package com.github.alllef.tradingplatformbackend.entity;
 
 import com.github.alllef.tradingplatformbackend.entity.enums.AdvertType;
 import lombok.*;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
