@@ -61,6 +61,6 @@ public class Advertisement {
     @EqualsAndHashCode.Exclude
     private Set<PhotoAdvert> photos;
 
-    @OneToOne(mappedBy = "advertisement")
-    private Review review;
+    @OneToMany(mappedBy = "advertisement")
+    private Set<Review> reviews;
 }
