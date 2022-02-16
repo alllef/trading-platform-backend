@@ -1,19 +1,19 @@
 package com.github.alllef.tradingplatformbackend.entity;
 
 import com.github.alllef.tradingplatformbackend.entity.enums.UserRole;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "platform_user")
+@Builder(toBuilder = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,4 +42,9 @@ public class User {
 
     @Column(nullable = false)
     private LocalDate registrationDate;
+
+    @OneToMany(mappedBy = "advertisement", fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    Set<Advertisement> adverts;
 }
