@@ -24,7 +24,7 @@ public class UserService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
 
-    public boolean registerUser(UserRegisterDto userRegisterDto) {
+    public Optional<User> registerUser(UserRegisterDto userRegisterDto) {
         String telegramNickName = userRegisterDto.getTelegramNickName();
 
         Optional<User> optUser = Optional.ofNullable(userRepo.findByTelegramNickname(telegramNickName));
@@ -37,11 +37,10 @@ public class UserService {
                     .role(roleRepo.findByRole(UserRole.CLIENT))
                     .build();
 
-            userRepo.save(newlyCreatedClient);
-            return true;
+            return Optional.of(userRepo.save(newlyCreatedClient));
         }
 
-        return false;
+        return Optional.empty();
     }
 
     public Optional<User> loginUser(UserLoginDto userLoginDto) {
@@ -57,7 +56,7 @@ public class UserService {
         return optUser;
     }
 
-    public User getUserById(Long userId){
+    public User getUserById(Long userId) {
         return userRepo.findById(userId)
                 .orElseThrow();
     }
