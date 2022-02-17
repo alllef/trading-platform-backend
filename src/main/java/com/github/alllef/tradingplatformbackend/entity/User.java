@@ -43,12 +43,12 @@ public class User {
     @Column(nullable = false)
     private LocalDate registrationDate;
 
-    @OneToMany(mappedBy = "advertisement", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Advertisement> adverts;
 
-    @OneToMany(mappedBy = "review",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reviewAuthor",fetch = FetchType.EAGER)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Review> givenReviews;

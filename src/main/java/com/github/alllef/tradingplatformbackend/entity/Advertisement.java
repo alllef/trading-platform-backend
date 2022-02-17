@@ -2,7 +2,6 @@ package com.github.alllef.tradingplatformbackend.entity;
 
 import com.github.alllef.tradingplatformbackend.entity.enums.AdvertType;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

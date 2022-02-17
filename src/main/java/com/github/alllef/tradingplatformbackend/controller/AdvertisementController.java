@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@RestController("/advertisements")
+@RestController
+@RequestMapping("/advertisements")
 public class AdvertisementController {
     private final AdvertService advertService;
 
@@ -34,14 +35,14 @@ public class AdvertisementController {
     }
 
     @PutMapping
-    Advertisement updateAdvertisement(@RequestParam AdvertUpdateDto advertUpdateDto) {
+    Advertisement updateAdvertisement(@RequestBody AdvertUpdateDto advertUpdateDto) {
         return advertService.updateAdvertisement(advertUpdateDto);
     }
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteAdvertisement(@PathVariable Long id) {
         advertService.deleteAdvertisement(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

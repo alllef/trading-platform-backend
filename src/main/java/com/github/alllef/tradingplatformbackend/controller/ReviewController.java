@@ -9,8 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/reviews")
 @RequiredArgsConstructor
+@RestController
+@RequestMapping("/reviews")
 public class ReviewController {
     private final ReviewService reviewService;
 
@@ -31,6 +32,7 @@ public class ReviewController {
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteReview(@PathVariable Long id){
+        reviewService.deleteReview(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
