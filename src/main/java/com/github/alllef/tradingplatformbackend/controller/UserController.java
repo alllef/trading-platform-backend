@@ -6,13 +6,10 @@ import com.github.alllef.tradingplatformbackend.entity.User;
 import com.github.alllef.tradingplatformbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-
-@RestController("/user")
+@RestController("/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
