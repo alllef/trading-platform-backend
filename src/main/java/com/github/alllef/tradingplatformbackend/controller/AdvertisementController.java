@@ -6,6 +6,7 @@ import com.github.alllef.tradingplatformbackend.entity.Advertisement;
 import com.github.alllef.tradingplatformbackend.entity.PhotoAdvert;
 import com.github.alllef.tradingplatformbackend.service.AdvertService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,7 @@ public class AdvertisementController {
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteAdvertisement(@PathVariable Long id) {
         advertService.deleteAdvertisement(id);
-        return ResponseEntity.ok()
-                .build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }
