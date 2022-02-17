@@ -1,6 +1,7 @@
 package com.github.alllef.tradingplatformbackend.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder(toBuilder = true)
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +22,10 @@ public class Review {
     @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(nullable = false,name = "advertisement_id")
     private Advertisement advertisement;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false,name = "review_author_id")
+    private User reviewAuthor;
 
     private String content;
 

@@ -46,5 +46,10 @@ public class User {
     @OneToMany(mappedBy = "advertisement", fetch = FetchType.EAGER)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    Set<Advertisement> adverts;
+    private Set<Advertisement> adverts;
+
+    @OneToMany(mappedBy = "review",fetch = FetchType.EAGER)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Review> givenReviews;
 }
