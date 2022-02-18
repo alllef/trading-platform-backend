@@ -16,21 +16,20 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/register")
-    ResponseEntity<User> registerUser(@RequestBody UserRegisterDto userRegisterDto) {
+    ResponseEntity<?> registerUser(@RequestBody UserRegisterDto userRegisterDto) {
         var optUser = userService.registerUser(userRegisterDto);
         if (optUser.isPresent())
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .build();
 
-        return ResponseEntity.ok(optUser.get());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/login")
     ResponseEntity<User> loginUser(@RequestBody UserLoginDto userLoginDto) {
         var optUser = userService.loginUser(userLoginDto);
         if (optUser.isEmpty())
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         return ResponseEntity.ok(optUser.get());
     }

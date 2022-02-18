@@ -3,7 +3,6 @@ package com.github.alllef.tradingplatformbackend.controller;
 import com.github.alllef.tradingplatformbackend.dto.advertisement.AdvertCreateDto;
 import com.github.alllef.tradingplatformbackend.dto.advertisement.AdvertUpdateDto;
 import com.github.alllef.tradingplatformbackend.entity.Advertisement;
-import com.github.alllef.tradingplatformbackend.entity.PhotoAdvert;
 import com.github.alllef.tradingplatformbackend.service.AdvertService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,13 +29,18 @@ public class AdvertisementController {
     }
 
     @PostMapping
-    Advertisement createAdvertisement(@RequestBody AdvertCreateDto advertCreateDto) {
-        return advertService.createAdvertisement(advertCreateDto);
+    ResponseEntity<Long> createAdvertisement(@RequestBody AdvertCreateDto advertCreateDto) {
+        Advertisement advertisement = advertService.createAdvertisement(advertCreateDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(advertisement.getId());
     }
 
     @PutMapping
-    Advertisement updateAdvertisement(@RequestBody AdvertUpdateDto advertUpdateDto) {
-        return advertService.updateAdvertisement(advertUpdateDto);
+    ResponseEntity<?> updateAdvertisement(@RequestBody AdvertUpdateDto advertUpdateDto) {
+        advertService.updateAdvertisement(advertUpdateDto);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
