@@ -2,7 +2,6 @@ package com.github.alllef.tradingplatformbackend.controller;
 
 import com.github.alllef.tradingplatformbackend.dto.review.ReviewCreateDto;
 import com.github.alllef.tradingplatformbackend.dto.review.ReviewUpdateDto;
-import com.github.alllef.tradingplatformbackend.entity.Advertisement;
 import com.github.alllef.tradingplatformbackend.entity.Review;
 import com.github.alllef.tradingplatformbackend.service.ReviewService;
 import lombok.RequiredArgsConstructor;

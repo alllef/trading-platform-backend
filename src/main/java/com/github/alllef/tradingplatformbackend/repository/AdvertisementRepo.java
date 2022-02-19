@@ -14,4 +14,5 @@ public interface AdvertisementRepo extends JpaRepository<Advertisement, Long> {
     List<Advertisement> findAdvertisementsByAuthor(User author);
 
     List<Advertisement> findAdvertisementsByAuthor_IsVerified(Boolean isVerified);
+    
 }

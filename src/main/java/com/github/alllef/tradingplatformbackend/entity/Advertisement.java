@@ -1,5 +1,7 @@
 package com.github.alllef.tradingplatformbackend.entity;
 
+import com.github.alllef.tradingplatformbackend.dto.GetDtoConverter;
+import com.github.alllef.tradingplatformbackend.dto.advertisement.AdvertGetDto;
 import com.github.alllef.tradingplatformbackend.entity.enums.AdvertType;
 import lombok.*;
 
@@ -13,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class Advertisement {
+public class Advertisement implements GetDtoConverter<AdvertGetDto> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,13 +58,30 @@ public class Advertisement {
     @Column(columnDefinition = "boolean default true")
     private Boolean isActive;
 
-    @OneToMany(mappedBy = "advertisement", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "advertisement", fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<PhotoAdvert> photos;
 
-    @OneToMany(mappedBy = "advertisement")
+    @OneToMany(mappedBy = "advertisement", fetch = FetchType.LAZY)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<Review> reviews;
+
+    public AdvertGetDto toGetDto(){
+        return AdvertGetDto.builder()
+                .id(id)
+                .type(type)
+                .author(author)
+                .price(price)
+                .description(description)
+                .category(category)
+                .creationDate(creationDate)
+                .closeDate(closeDate)
+                .closedByModerator(closedByModerator)
+                .advertName(advertName)
+                .currency(currency)
+                .isActive(isActive)
+                .build();
+    }
 }

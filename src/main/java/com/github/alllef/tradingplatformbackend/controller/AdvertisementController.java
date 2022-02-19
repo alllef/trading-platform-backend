@@ -1,8 +1,11 @@
 package com.github.alllef.tradingplatformbackend.controller;
 
 import com.github.alllef.tradingplatformbackend.dto.advertisement.AdvertCreateDto;
+import com.github.alllef.tradingplatformbackend.dto.advertisement.AdvertGetDto;
 import com.github.alllef.tradingplatformbackend.dto.advertisement.AdvertUpdateDto;
 import com.github.alllef.tradingplatformbackend.entity.Advertisement;
+import com.github.alllef.tradingplatformbackend.entity.PhotoAdvert;
+import com.github.alllef.tradingplatformbackend.entity.Review;
 import com.github.alllef.tradingplatformbackend.service.AdvertService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +24,34 @@ public class AdvertisementController {
     @GetMapping(params = {"categoryId"})
     List<Advertisement> findAdvertsByCategory(@RequestParam Optional<Long> categoryId) {
         return advertService.findAdvertsByCategory(categoryId.get());
+    }
+
+    @GetMapping("/{id}")
+    AdvertGetDto getAdvertisement(@PathVariable Long id) {
+        return advertService.getAdvertisement(id);
+    }
+
+    @GetMapping("/{id}/reviews")
+    List<Review> getReviews(@PathVariable Long id) {
+        return advertService.getAdvertReviews(id);
+    }
+
+    @GetMapping("/{id}/photos")
+    List<PhotoAdvert> getPhotos(@PathVariable Long id) {
+        return advertService.getAdvertPhotos(id);
+    }
+
+    @PostMapping("/{id}/photos")
+    ResponseEntity<Long> addPhoto(@RequestBody String photoLink, @PathVariable Long id) {
+        return ResponseEntity.ok()
+                .body(advertService.addPhoto(photoLink, id));
+    }
+
+    @DeleteMapping("/{id}/photos/{photoId}")
+    ResponseEntity<?> deletePhoto(@PathVariable Long id, @PathVariable Long photoId) {
+        advertService.deleteAdvertisement(id, photoId);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping(params = {"isVerified"})

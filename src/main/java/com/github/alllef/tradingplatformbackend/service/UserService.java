@@ -1,5 +1,6 @@
 package com.github.alllef.tradingplatformbackend.service;
 
+import com.github.alllef.tradingplatformbackend.dto.user.UserGetDto;
 import com.github.alllef.tradingplatformbackend.dto.user.UserLoginDto;
 import com.github.alllef.tradingplatformbackend.dto.user.UserRegisterDto;
 import com.github.alllef.tradingplatformbackend.entity.Advertisement;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -56,10 +58,35 @@ public class UserService {
         return optUser;
     }
 
-    public User getUserById(Long userId) {
-        return userRepo.findById(userId)
+    public List<Review> getReviews(Long id){
+        User user = userRepo.findById(id)
                 .orElseThrow();
+
+        return user.getGivenReviews()
+                .stream()
+                .toList();
     }
+
+    public List<Advertisement> getAdvertisements(Long id){
+        User user = userRepo.findById(id)
+                .orElseThrow();
+
+        return user.getAdverts()
+                .stream()
+                .toList();
+    }
+
+    public UserGetDto getUserById(Long userId) {
+        User user = userRepo.findById(userId)
+                .orElseThrow();
+
+        UserGetDto userGetDto = user.toGetDto();
+
+        return userGetDto.toBuilder()
+                .averageMark(calcAverageComments(user))
+                .build();
+    }
+
 
     public BigDecimal calcAverageComments(User user) {
         int reviewsNum = 0;
